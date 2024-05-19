@@ -73,11 +73,9 @@ class IsolateInterpreter {
       debugName: debugName,
     );
 
+    _sendPort = await _receivePort.first as SendPort;
+    
     _stateSubscription = _receivePort.listen((state) {
-      if (state is SendPort) {
-        _sendPort = state;
-      }
-
       if (state is IsolateInterpreterState) {
         _state = state;
       }
